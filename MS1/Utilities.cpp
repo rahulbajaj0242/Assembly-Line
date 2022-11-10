@@ -32,9 +32,19 @@ namespace sdds {
         more = false;
         throw "Delimiter Found!";
       }
-      if(getline(s, token, m_delimiter)) {
+
+      auto delFound = stringAtPos.find(m_delimiter);
+
+      if(delFound == string::npos) {
+        getline(s, token, '\n');
         token = trim(token);
+        if(m_widthField < token.size()) m_widthField= token.size();
+        more = false;
+        return token;
+      }
+      else if(getline(s, token, m_delimiter)) {
         size_t currPos = str.find(token);
+        token = trim(token);
         next_pos = str.find(m_delimiter, currPos);
         more = true;
         if(next_pos == string::npos) {
@@ -43,7 +53,7 @@ namespace sdds {
         else {
           next_pos++;
         }
-        if(m_widthField < token.length()) m_widthField= token.length();
+        if(m_widthField < token.size()) m_widthField= token.size();
         return token;
       }
       more = false;

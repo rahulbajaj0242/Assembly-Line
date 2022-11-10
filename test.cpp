@@ -12,33 +12,46 @@ std::string trim(std::string &str){
   }
 
 std::string extractToken(const std::string& str, size_t& next_pos, bool& more) {
-  string token;
-  string stringAtPos = str.substr(next_pos);
-  stringstream s(stringAtPos);
-  if(stringAtPos[0] == m_delimiter) {
-    throw "Delimiter Found!";
-  }
-  if(getline(s, token, m_delimiter) && more) {
-    token = trim(token);
-    size_t currPos = str.find(token);
-    next_pos = str.find(m_delimiter, currPos);
-    more = true;
-    if(next_pos == string::npos) {
-      more= false;
+  if(more) {
+      string token;
+      string stringAtPos = str.substr(next_pos);
+      stringstream s(stringAtPos);
+      if(stringAtPos[0] == m_delimiter) {
+        more = false;
+        throw "Delimiter Found!";
+      }
+
+      auto delFound = stringAtPos.find(m_delimiter);
+
+      if(delFound == string::npos) {
+        getline(s, token, '\n');
+        token = trim(token);
+        more = false;
+        return token;
+      }
+      else if(getline(s, token, m_delimiter)) {
+        token = trim(token);
+        size_t currPos = str.find(token);
+        next_pos = str.find(m_delimiter, currPos);
+        more = true;
+        if(next_pos == string::npos) {
+          more= false;
+        }
+        else {
+          next_pos++;
+        }
+        // if(m_widthField < token.length()) m_widthField= token.length();
+        return token;
+      }
+      more = false;
     }
-    else {
-      next_pos++;
-    }
-    return token;
-  }
-  more = false;
-  return "NULL";
+    return "NULL";
 }
 
 
 int main() {
   
-  string s = "Armchair,    654321,  10,  Upholstered Wing Chair";
+  string s = "Bed,         123456,   5,  Queen size bed with headboard";
 
   bool more = true;
   size_t next_pos = 0;

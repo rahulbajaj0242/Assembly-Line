@@ -31,9 +31,13 @@ namespace sdds {
       string stock = u.extractToken(str, next_pos, more);
       m_stock = stoi(stock);
 
-      m_widthField = m_widthField > u.getFieldWidth() ? m_widthField: u.getFieldWidth();
+      if (m_widthField < u.getFieldWidth()) {
+				m_widthField = u.getFieldWidth();
+			}
+
 
       m_description = u.extractToken(str, next_pos, more);
+
     }
   }
 
@@ -42,9 +46,7 @@ namespace sdds {
   }
 
   size_t Station::getNextSerialNumber() {
-    int temp = m_nextNum;
-    m_nextNum++;
-    return temp;
+    return m_nextNum++;
   }
 
   size_t Station::getQuantity() const {
@@ -58,11 +60,10 @@ namespace sdds {
   }
 
   void Station::display(std::ostream& os, bool full) const {
-    if(!full) {
-      os << setfill('0') << setw(3) << right<< m_id  << " | " << setfill(' ') << setw(m_widthField) << left << m_name << " | " << setw(6) << left <<  m_nextNum << " |";
-    }
-    else {
-      os << setw(3) << left << m_id << " | " << setw(m_widthField) << left << m_name << " | " << setw(6) << left <<  m_nextNum << " | " << right << setw(4) << m_stock << " | " <<  left << m_description;
+    os << setfill('0') << setw(3) << right<< m_id  << " | " << setfill(' ') << setw(m_widthField + 1) << left << m_name << " | " << setw(6) << setfill('0') << right <<  m_nextNum << " | ";
+    if(full) {
+      os  << right << setfill(' ') << setw(4) << m_stock << " | " <<  left << m_description;
+      
     }
     os << endl;
   }
