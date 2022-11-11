@@ -51,21 +51,24 @@ std::string extractToken(const std::string& str, size_t& next_pos, bool& more) {
 
 int main() {
   
-  string s = "Bed,         123456,   5,  Queen size bed with headboard";
+  // string s = "Bed,         123456,   5,  Queen size bed with headboard";
 
-  bool more = true;
-  size_t next_pos = 0;
+  // bool more = true;
+  // size_t next_pos = 0;
 
-  while(more) {
-    try
-    {
-      cout << extractToken(s, next_pos, more) << endl;
-    }
-    catch(const std::exception& e)
-    {
-      std::cerr << e.what() << '\n';
-    }
+  // while(more) {
+  //   try
+  //   {
+  //     cout << extractToken(s, next_pos, more) << endl;
+  //   }
+  //   catch(const std::exception& e)
+  //   {
+  //     std::cerr << e.what() << '\n';
+  //   }
     
-  }
+  // }
 
+  string list = " Office Chair|Desk|Bookcase|Bookcase|Filing Cabinet";
+  int cnt = count(list.begin(), list.end(), '|');
+  cout << cnt << endl;
 }

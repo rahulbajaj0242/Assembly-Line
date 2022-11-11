@@ -1,15 +1,16 @@
 #ifndef CUSTOMERORDER_H
 #define CUSTOMERORDER_H
 #include "string.h"
+#include "Station.h"
 
 namespace sdds {
 
   struct Item {
-	std::string m_itemName;
-	size_t m_serialNumber{0};
-	bool m_isFilled{false};
+		std::string m_itemName;
+		size_t m_serialNumber{0};
+		bool m_isFilled{false};
 
-	Item(const std::string& src) : m_itemName(src) {};
+		Item(const std::string& src) : m_itemName(src) {};
 };
 
   class CustomerOrder {
