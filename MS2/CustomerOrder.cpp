@@ -15,6 +15,7 @@ namespace sdds {
   CustomerOrder::~CustomerOrder() {
     for(size_t i=0; i<m_cntItem; i++) {
         delete m_lstItem[i];
+        m_lstItem[i] = nullptr;
       }
     delete [] m_lstItem;
     m_lstItem = nullptr;
@@ -27,22 +28,15 @@ namespace sdds {
 
     m_name = u.extractToken(str, next_pos, more);
     m_product = u.extractToken(str, next_pos, more);
-    cout << "NP: " << next_pos << endl;
     string list = str.substr(next_pos);
     auto cnt = count(list.begin(), list.end(), u.getDelimiter());
     m_lstItem = new Item*[cnt+1];
     m_cntItem = cnt+1;
     size_t i=0;
     while(i < m_cntItem) {
-      cout << more << endl;
-      Item* temp = new Item(u.extractToken(str, next_pos, more));
-      cout << "N: " << next_pos << endl;
-      m_lstItem[i] = temp;
+      m_lstItem[i] = new Item(u.extractToken(str, next_pos, more));
       i++;
     }
-    for_each(m_lstItem, m_lstItem+m_cntItem, [&]( Item* item){
-      cout << item->m_itemName << endl;
-    });
     m_widthField = m_widthField > u.getFieldWidth() ? m_widthField: u.getFieldWidth();
   }
 
@@ -50,20 +44,26 @@ namespace sdds {
     throw "No Copy operations allowed!";
   }
 
-  CustomerOrder:: CustomerOrder(const CustomerOrder&& co) noexcept {
+  CustomerOrder:: CustomerOrder( CustomerOrder&& co) noexcept {
     *this = std::move(co);
   }
 
-  CustomerOrder& CustomerOrder::operator=(const CustomerOrder&& co) noexcept {
+  CustomerOrder& CustomerOrder::operator=( CustomerOrder&& co) noexcept {
     if(this != &co) {
+      if (m_lstItem) {
+        for(size_t i=0; i<m_cntItem; i++) {
+          delete m_lstItem[i];
+        }
+        delete [] m_lstItem;
+      }
       m_name = co.m_name;
       m_product = co.m_product;
       m_cntItem = co.m_cntItem;
-      for(size_t i=0; i<m_cntItem; i++) {
-        delete m_lstItem[i];
-      }
-      delete [] m_lstItem;
       m_lstItem = co.m_lstItem;
+      co.m_name = "";
+      co.m_product = "";
+      co.m_cntItem = 0;
+      co.m_lstItem = nullptr;
     }
     return *this;
   }
