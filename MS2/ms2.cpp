@@ -168,6 +168,7 @@ int main(int argc, char** argv)
 		cout << "isItemFilled(\"CPU\"): "
 			 << (tmp2.isItemFilled("CPU") ? "FILLED" : "MISSING")
 		     << endl;
+				 
 
 		cout << "isOrderFilled(): "
 		     << (tmp2.isOrderFilled() ? "FILLED" : "MISSING")

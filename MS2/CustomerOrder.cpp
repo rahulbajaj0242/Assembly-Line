@@ -87,9 +87,11 @@ namespace sdds {
     if(any_of(m_lstItem, m_lstItem+m_cntItem, [=](const Item* item){
       return (station.getItemName() == item->m_itemName);
     })) {
+      string temp = "1234";
       for_each(m_lstItem, m_lstItem+m_cntItem, [&]( Item* item){
-        if(station.getItemName() == item->m_itemName) {
+        if(station.getItemName() == item->m_itemName && station.getItemName() != temp) {
           if(station.getQuantity() >= 1) {
+            temp = item->m_itemName;
             station.updateQuantity();
             item->m_isFilled = true;
             item->m_serialNumber = station.getNextSerialNumber();
@@ -107,7 +109,8 @@ namespace sdds {
   void CustomerOrder::display(std::ostream& os) const {
     os << m_name << " - " << m_product << endl;
     for_each(m_lstItem, m_lstItem+m_cntItem, [&]( Item* item){
-      os << "[" << item->m_serialNumber << "] " << item->m_itemName << " - " << item->m_isFilled << endl;
+      string status = item->m_isFilled? "FILLED" :"TO BE FILLED";
+      os << "[" << setw(6)<< setfill('0') << item->m_serialNumber << "] "  << setw(m_widthField) << setfill(' ') << item->m_itemName << "   - " << status << endl;
     });
   }
 
