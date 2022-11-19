@@ -1,3 +1,11 @@
+// Name: Rahul Bajaj
+// Seneca Student ID: 107707218
+// Seneca email: rbajaj12@myseneca.ca
+// Date of completion: Nov 9, 2022
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #ifndef UTILITIES_H
 #define UTILITIES_H
 #include <string>
