@@ -83,59 +83,31 @@ namespace sdds {
     }));
   }
 
-  // void CustomerOrder::fillItem(Station& station, std::ostream& os) {
-  //   if(any_of(m_lstItem, m_lstItem+m_cntItem, [=](const Item* item){
-  //     return (station.getItemName() == item->m_itemName);
-  //   })) {
-  //     string temp = "1234";
-  //     for_each(m_lstItem, m_lstItem+m_cntItem, [&]( Item* item){
-  //       if(station.getItemName() == item->m_itemName && station.getItemName() != temp) {
-  //         if(station.getQuantity() >= 1) {
-  //           temp = item->m_itemName;
-  //           station.updateQuantity();
-  //           item->m_isFilled = true;
-  //           item->m_serialNumber = station.getNextSerialNumber();
-
-  //           os << "    Filled " << m_name << ", " << m_product << " [" << item->m_itemName << "]" << endl;
-  //         }
-  //         else {
-  //           os << "Unable to fill " << m_name << ", " << m_product << " [" << item->m_itemName << "]" << endl;
-  //         }
-  //       }
-  //     });
-  //   } 
-  // }
-
-  void CustomerOrder::fillItem(Station& station, std::ostream& os)
-    {
-        bool flag = true;
-        for (size_t i = 0; i < m_cntItem && flag; i++)
-        {
-            if (station.getItemName() == m_lstItem[i]->m_itemName && !m_lstItem[i]->m_isFilled)
-            {
-                flag = false;
-                if (station.getQuantity() > 0)
-                {
-                    m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
-                    m_lstItem[i]->m_isFilled = true;
-                    station.updateQuantity();
-                    os << "    Filled " << m_name << ", ";
-                    os << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-                }
-                else
-                {
-                    os << "    Unable to fill " << m_name << ", ";
-                    os << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
-                }
-            }
+  void CustomerOrder::fillItem(Station& station, std::ostream& os) {
+      bool flag = true;
+      for (size_t i = 0; i < m_cntItem && flag; i++) {
+        if (station.getItemName() == m_lstItem[i]->m_itemName && !m_lstItem[i]->m_isFilled) {
+          if (station.getQuantity() > 0) {
+            flag = false;
+            m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+            m_lstItem[i]->m_isFilled = true;
+            station.updateQuantity();
+            os << "    Filled " << m_name << ", ";
+            os << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+          }
+          else {
+            os << "    Unable to fill " << m_name << ", ";
+            os << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+          }
         }
+      }
     }
 
   void CustomerOrder::display(std::ostream& os) const {
     os << m_name << " - " << m_product << endl;
     for_each(m_lstItem, m_lstItem+m_cntItem, [&]( Item* item){
       string status = item->m_isFilled? "FILLED" :"TO BE FILLED";
-      os << "[" << setw(6)<< setfill('0') << item->m_serialNumber << "] "  << setw(m_widthField) << setfill(' ') << item->m_itemName << "   - " << status << endl;
+      os << "[" << right << setw(6)<< setfill('0') << item->m_serialNumber << "] " << left  << setw(m_widthField) << setfill(' ') << item->m_itemName << "   - " << status << endl;
     });
   }
 

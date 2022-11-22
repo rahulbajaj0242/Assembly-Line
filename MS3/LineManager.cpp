@@ -68,14 +68,14 @@ namespace sdds {
     os << "Line Manager Iteration: " << curr << endl;
     curr++;
     if(!g_pending.empty()) {
-      *m_firstStation += std::move(g_pending.front());
+      *m_activeLine.front() += std::move(g_pending.front());
       g_pending.pop_front();
     }
 
-    for(auto i: m_activeLine) {
+    for(auto& i: m_activeLine) {
       i->fill(os);
     }
-    for(auto i: m_activeLine) {
+    for(auto& i: m_activeLine) {
       i->attemptToMoveOrder();
     }
 
