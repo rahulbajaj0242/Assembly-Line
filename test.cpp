@@ -81,3 +81,27 @@ int main() {
   cout << "Second: '" << second << endl;
 
 }
+
+
+
+bool Workstation::attemptToMoveOrder()
+	{
+		bool Ordermoved = false;
+		if (!m_orders.empty())
+		{
+			if (m_orders.front().isItemFilled(Station::getItemName()) || Station::getQuantity() <= 0)
+			{
+				Ordermoved = true;
+				if (m_pNextStation)
+				{
+					*m_pNextStation += std::move(m_orders.front());
+				}
+				else
+				{
+					(m_orders.front().isOrderFilled()) ? g_completed.push_back(std::move(m_orders.front())) : g_incomplete.push_back(std::move(m_orders.front()));
+				}
+				m_orders.pop_front();
+			}
+		}
+		return Ordermoved;
+	}

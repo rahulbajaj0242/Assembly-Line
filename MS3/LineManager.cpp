@@ -3,7 +3,7 @@
 #include "Utilities.h"
 #include "LineManager.h"
 #include <iomanip>
-
+#include <algorithm>
 
 using namespace std;
 
@@ -64,11 +64,28 @@ namespace sdds {
   }
 
   bool LineManager::run(std::ostream& os) {
-    
+    static int curr = 1;
+    os << "Line Manager Iteration: " << curr << endl;
+    curr++;
+    if(!g_pending.empty()) {
+      *m_firstStation += std::move(g_pending.front());
+      g_pending.pop_front();
+    }
+
+    for(auto i: m_activeLine) {
+      i->fill(os);
+    }
+    for(auto i: m_activeLine) {
+      i->attemptToMoveOrder();
+    }
+
+    return (g_completed.size() + g_incomplete.size() == m_cntCustomerOrder);
   }
 
   void LineManager::display(std::ostream& os) const {
-
+    for(auto i: m_activeLine) {
+      i->display(os);
+    }
   }
 
 }
