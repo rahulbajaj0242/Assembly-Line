@@ -54,11 +54,17 @@ namespace sdds {
   }
   
   void LineManager::reorderStations() {
-
+    vector<Workstation*> newLine;
+    Workstation* ws = m_firstStation;
+    while(ws) {
+      newLine.push_back(ws);
+      ws = ws->getNextStation();
+    }
+    m_activeLine = newLine;
   }
 
   bool LineManager::run(std::ostream& os) {
-
+    
   }
 
   void LineManager::display(std::ostream& os) const {
