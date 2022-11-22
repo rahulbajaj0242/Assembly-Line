@@ -12,7 +12,7 @@ namespace sdds {
   std::deque<CustomerOrder> g_incomplete;
 
   class Workstation: public Station {
-    std::deque<CustomerOrder> m_order{};
+    std::deque<CustomerOrder> m_order;
     Workstation* m_pNextStation{};
 
   public:

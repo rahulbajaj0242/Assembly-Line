@@ -68,7 +68,16 @@ int main() {
     
   // }
 
-  string list = " Office Chair|Desk|Bookcase|Bookcase|Filing Cabinet";
-  int cnt = count(list.begin(), list.end(), '|');
-  cout << cnt << endl;
+  // string list = " Office Chair|Desk|Bookcase|Bookcase|Filing Cabinet";
+  // int cnt = count(list.begin(), list.end(), '|');
+  // cout << cnt << endl;
+
+  string data = "Nighttable|Desk";
+
+  string first = data.substr(0, data.find('|'));
+  string second = data.substr(data.find('|')+1);
+
+  cout << "First: '" << first << endl;
+  cout << "Second: '" << second << endl;
+
 }
