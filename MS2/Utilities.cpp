@@ -1,11 +1,3 @@
-// Name: Rahul Bajaj
-// Seneca Student ID: 107707218
-// Seneca email: rbajaj12@myseneca.ca
-// Date of completion: Nov 16, 2022
-//
-// I confirm that I am the only author of this file
-//   and the content was created entirely by me.
-
 #include <iostream>
 #include "Utilities.h"
 #include <string.h>
@@ -51,16 +43,9 @@ namespace sdds {
         return token;
       }
       else if(getline(s, token, m_delimiter)) {
-        size_t currPos = str.find(token);
+        next_pos = next_pos+token.length() + 1;
         token = trim(token);
-        next_pos = str.find(m_delimiter, currPos);
         more = true;
-        if(next_pos == string::npos) {
-          more= false;
-        }
-        else {
-          next_pos++;
-        }
         if(m_widthField < token.size()) m_widthField= token.size();
         return token;
       }
