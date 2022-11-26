@@ -65,12 +65,12 @@ namespace sdds {
         delete [] m_lstItem;
       }
       m_name = co.m_name;
-      m_product = co.m_product;
       m_cntItem = co.m_cntItem;
+      m_product = co.m_product;
       m_lstItem = co.m_lstItem;
       co.m_name = "";
-      co.m_product = "";
       co.m_cntItem = 0;
+      co.m_product = "";
       co.m_lstItem = nullptr;
     }
     return *this;
