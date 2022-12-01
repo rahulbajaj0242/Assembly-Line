@@ -40,28 +40,6 @@ namespace sdds {
     return false;
   }
 
-  // bool Workstation::attemptToMoveOrder()
-	// {
-	// 	bool Ordermoved = false;
-	// 	if (!m_order.empty())
-	// 	{
-	// 		if (m_order.front().isItemFilled(Station::getItemName()) || Station::getQuantity() <= 0)
-	// 		{
-	// 			Ordermoved = true;
-	// 			if (m_pNextStation)
-	// 			{
-	// 				*m_pNextStation += std::move(m_order.front());
-	// 			}
-	// 			else
-	// 			{
-	// 				(m_order.front().isOrderFilled()) ? g_completed.push_back(std::move(m_order.front())) : g_incomplete.push_back(std::move(m_order.front()));
-	// 			}
-	// 			m_order.pop_front();
-	// 		}
-	// 	}
-	// 	return Ordermoved;
-	// }
-
   void Workstation::setNextStation(Workstation* station) {
     m_pNextStation = station;
   }
