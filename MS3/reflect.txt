@@ -8,7 +8,7 @@
 
 
 
-My experience with the whole course has been much more enjoyable and interesting than I earlier thought. Since both IPC and OOP244 were online, I was a bit nervous about what to expect when the classes would move to in-person but I  have to say that I really enjoy the in-person lab. 
+My experience with the whole course has been much more enjoyable and fun than I expected. Since both IPC and OOP244 were online, I was a bit nervous about what to expect when the classes would move to in-person but I  have to say that I really enjoy the in-person lab. 
 Workshops have been fun to do even though bit frustrating at times when your code doesn't run or has bugs. 
 The project was also enjoyable to code and leaving out the ms3, was rather straightforward in the logic. In ms3, it took me some time to get the logic right on how to identify the first station in the assembly line but I liked the challenge.
 Overall, my experience with the OOP345 course has been great and I really appreciate all the great lectures and lab discussions given by my professor Hong Huang. 
